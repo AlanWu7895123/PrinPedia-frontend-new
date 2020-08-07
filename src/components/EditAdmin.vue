@@ -6,7 +6,7 @@
                 <el-table-column prop="date" label="申请时间" />
                 <el-table-column label="词条详情">
                     <template slot-scope="scope">
-                        <router-link :to="'/compare/' + scope.row.id">{{scope.row.title}}</router-link>
+                        <router-link id="detail-button1" :to="'/compare/' + scope.row.id">{{scope.row.title}}</router-link>
                     </template>
                 </el-table-column>
             </el-table>
@@ -17,7 +17,7 @@
                 <el-table-column prop="date" label="申请时间" />
                 <el-table-column label="词条详情">
                     <template slot-scope="scope">
-                        <router-link :to="'/userLogDetail/' + scope.row.id">{{scope.row.title}}</router-link>
+                        <router-link id="detail-button2" :to="'/userLogDetail/' + scope.row.id">{{scope.row.title}}</router-link>
                     </template>
                 </el-table-column>
                 <el-table-column label="状态">

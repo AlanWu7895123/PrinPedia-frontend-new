@@ -23,7 +23,7 @@
           <el-table-column prop="date" label="申请时间" />
           <el-table-column label="词条详情">
             <template slot-scope="scope">
-              <router-link :to="'/userLogDetail/' + scope.row.id">{{scope.row.title}}</router-link>
+              <router-link :to="'/userLogDetail/' + scope.row.id" id="userLogDetail">{{scope.row.title}}</router-link>
             </template>
           </el-table-column>
           <el-table-column label="申请状态">

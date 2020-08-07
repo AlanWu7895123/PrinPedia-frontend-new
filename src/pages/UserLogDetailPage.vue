@@ -14,7 +14,7 @@
         </el-col>
       </el-row>
       <el-row><VueWikitext :source="logDetail.wikiText" /></el-row>
-      <el-row><el-button @click="$router.back()">返回</el-button></el-row>
+      <el-row><el-button id="back-button" @click="$router.back()">返回</el-button></el-row>
     </el-main>
     <el-footer><Footer /></el-footer>
   </el-container>

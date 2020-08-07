@@ -7,10 +7,10 @@
           <VueWikitext :source="wikiData.wikiText" />
         </el-tab-pane>
         <el-tab-pane label="编辑" name="editing">
-          <el-input type="textarea" v-model="wikiData.wikiText" :rows="25" />
+          <el-input id="input" type="textarea" v-model="wikiData.wikiText" :rows="25" />
         </el-tab-pane>
       </el-tabs>
-      <el-button @click="submit">提交修改</el-button>
+      <el-button id="submit-button" @click="submit">提交修改</el-button>
     </el-main>
   </el-container>
 </template>

@@ -12,7 +12,8 @@
 <!--        <el-avatar size="small" :src="userData.avatar" style="margin-right: 10px" />-->
         <span>
           <el-button-group>
-            <el-button type="text" @click="$router.push('/user')">
+              <el-button type="text" @click="$router.push('/index')">首页</el-button>
+            <el-button id=“user-button” type="text" @click="$router.push('/user')">
               {{$store.state.userData.username}}
             </el-button>
             <el-button id="logout-button" type="text" @click="logout">登出</el-button>

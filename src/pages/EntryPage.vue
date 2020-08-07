@@ -7,7 +7,7 @@
       <el-container>
         <el-aside>
           <el-button @click="$router.back()">返回</el-button>
-          <el-button @click="$router.push('/edit/' + entryName)">编辑词条</el-button>
+          <el-button id="edit-button" @click="$router.push('/edit/' + entryName)">编辑词条</el-button>
           <Catalog :catalog="wikiData.content" />
         </el-aside>
         <el-main>
