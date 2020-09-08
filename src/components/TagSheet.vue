@@ -21,6 +21,7 @@
     </div>
     <div v-if="editing">
       <el-input
+          id="add-tag-input"
           class="input-new-tag"
           v-if="inputVisible"
           v-model="inputValue"
@@ -28,7 +29,7 @@
           size="small"
           @keyup.enter.native="handleInputConfirm"
           @blur="handleInputConfirm"/>
-      <el-button v-else class="button-new-tag" size="small" @click="showInput">+添加标签</el-button>
+      <el-button id="add-tag" v-else class="button-new-tag" size="small" @click="showInput">+添加标签</el-button>
     </div>
     <div v-else>
       <el-dialog title="词条一览">

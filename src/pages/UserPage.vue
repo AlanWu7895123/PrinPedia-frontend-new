@@ -6,7 +6,7 @@
         <el-row>
           <i class="el-icon-s-custom" />
           <span>个人信息</span>
-          <el-button type="text" style="margin-left: 10px" @click="showEditDialog">
+          <el-button id="edit-btn" type="text" style="margin-left: 10px" @click="showEditDialog">
             <i class="el-icon-edit" />
             <span>编辑</span>
           </el-button>
@@ -14,7 +14,7 @@
         <el-dialog :visible.sync="dialogVisible">
           <el-form :model="$store.state.userData">
             <el-form-item label="邮箱">
-              <el-input v-model="userInfo.email" />
+              <el-input id="userInfo-edit-input" v-model="userInfo.email" />
             </el-form-item>
             <el-form-item label="生日">
               <el-date-picker v-model="userInfo.birthday" type="date" />
@@ -22,7 +22,7 @@
           </el-form>
           <span slot="footer">
             <el-button-group>
-              <el-button type="primary" @click="editUserInfo">确定</el-button>
+              <el-button id="confirm-btn" type="primary" @click="editUserInfo">确定</el-button>
               <el-button @click="cancelEdit">取消</el-button>
             </el-button-group>
           </span>

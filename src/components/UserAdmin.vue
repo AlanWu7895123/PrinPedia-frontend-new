@@ -6,7 +6,7 @@
       <template slot-scope="scope">
         <span style="margin-right: 10px">{{scope.row.enabled ? '正常' : '已禁用'}}</span>
         <span>
-          <el-button type="text" @click="changeDisableState(scope.row)">
+          <el-button id="ban-button" type="text" @click="changeDisableState(scope.row)">
             {{scope.row.enabled ? '禁用' : '解禁'}}
           </el-button>
         </span>
