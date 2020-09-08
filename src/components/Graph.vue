@@ -8,6 +8,7 @@ import echarts from "echarts/lib/echarts";
 import "echarts/lib/chart/graph";
 
 export default {
+  name: 'Graph',
   data() {
     return {
       graph: "",

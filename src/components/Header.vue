@@ -10,8 +10,9 @@
       <el-col :span="4">
         <span>
           <el-button-group>
+            <el-button type="text" @click="$router.push('/index')">首页</el-button>
             <el-button type="text" @click="$router.push('/user')">
-              {{$store.state.userData.username}}
+              {{$store.state.username}}
             </el-button>
             <el-button id="logout-button" type="text" @click="logout">登出</el-button>
           </el-button-group>
@@ -37,6 +38,7 @@ export default {
                     } else {
                         this.$message.error(response.data.message);
                     }
+                    this.$router.push('/');
                 })
         }
     }

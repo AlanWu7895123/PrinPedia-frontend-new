@@ -31,6 +31,7 @@ export default {
         search() {
             if (this.searchKeyword !== '')
                 this.$router.push('/result/' + this.searchKeyword);
+            location.reload();
         }
     },
     mounted() {

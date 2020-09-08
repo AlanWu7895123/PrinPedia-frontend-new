@@ -5,7 +5,7 @@
         <el-tab-pane label="登录" name="login">
           <el-form :model="loginForm" label-width="80px">
             <el-form-item label="用户名">
-              <el-input v-model="loginForm.username" aria-placeholder="请输入用户名" />
+              <el-input id="login-input-username" v-model="loginForm.username" aria-placeholder="请输入用户名" />
             </el-form-item>
             <el-form-item label="密码">
               <el-input v-model="loginForm.password" aria-placeholder="请输入密码" show-password />
@@ -75,15 +75,31 @@ export default {
     },
     methods: {
         login() {
+            // return POST(Constants.loginUrl, {
+            //   username: this.loginForm.username,
+            //   password: this.loginForm.password
+            // }, (response) => {
+            //   console.log(response);
+            //   if (response.data.status === 0) {
+            //
+            //     this.$message.success(response.data.message);
+            //     this.$store.commit('login', response.data.extraData);
+            //     this.$router.back();
+            //   } else {
+            //     this.$message.error(response.data.message);
+            //   }
+            // });
             let params = new URLSearchParams();
             params.append("username", this.loginForm.username);
             params.append("password", this.loginForm.password);
-            return axios.post("/login", params)
+            return axios.post(Constants.loginUrl, params)
+            // return axios.post("http://54.242.232.119:8080/login", params)
                 .then(response => {
+                  console.log(response);
                     if (response.data.status === 0) {
-                        console.log(response)
+
                         this.$message.success(response.data.message);
-                        this.$store.commit('setUserData', response.data.extraData);
+                        this.$store.commit('login', response.data.extraData);
                         this.$router.back();
                     } else {
                         this.$message.error(response.data.message);

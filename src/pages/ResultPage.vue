@@ -6,11 +6,31 @@
     <el-container>
       <el-main>
         <SearchBar :keyword="keyword" />
-        <el-button type="main" @click="dialogVisible = true">显示推荐</el-button>
-        <el-dialog title="推荐词条" :visible.sync="dialogVisible">
-          <KnowledgeGraph :central-word="searchResults[0].title" />
-        </el-dialog>
-        <div class="not-found" v-if="notFound">
+        <div class="found" v-if="!notFound">
+          <el-button-group>
+            <el-button @click="dialogVisible = true">显示推荐</el-button>
+<!--            <el-button @click="$router.push('/tags')">全部标签</el-button>-->
+          </el-button-group>
+          <el-dialog title="推荐词条" :visible.sync="dialogVisible">
+            <el-row>
+              <el-col :span="18">
+                <KnowledgeGraph :source-data="relation" />
+              </el-col>
+              <el-col :span="6">
+                <div>
+                  <i class="el-icon-sort-down" />
+                  <span>按联系降序排序</span>
+                </div>
+                <div v-if="relation.children.length !== 0">子词条</div>
+                <div v-for="(child, c) in relation.children" :key="c">{{child}}</div>
+                <br />
+                <div v-if="relation.parents.length !== 0">父词条</div>
+                <div v-for="(parent, p) in relation.parents" :key="p">{{parent}}</div>
+              </el-col>
+            </el-row>
+          </el-dialog>
+        </div>
+        <div class="not-found" v-else-if="notFound">
           没有找到相应词条"{{keyword}}"。您可能想要的是以下结果：
         </div>
         <div class="found">
@@ -41,8 +61,13 @@ export default {
         return {
             keyword: this.$route.params.keyword,
             searchResults: [],
-            notFound: false,
-            dialogVisible: false
+            notFound: true,
+            dialogVisible: false,
+            relation: {
+                current: '',
+                children: [],
+                parents: []
+            }
         };
     },
     methods: {
@@ -50,9 +75,11 @@ export default {
             return GET(Constants.searchUrl, {
                 keyword: this.keyword
             }, (data) => {
-                console.log(data)
-                this.searchResults = data.extraData;
+                // console.log(data)
                 this.notFound = (data.status === -1);
+                if (this.notFound) this.searchResults = [];
+                else this.searchResults = data.extraData;
+              // this.$router.go(0)
             });
         },
         createEntry() {
@@ -61,15 +88,29 @@ export default {
             }, () => {
                 this.$router.push('/edit/' + this.keyword);
             });
+        },
+        getRelation() {
+            return GET(Constants.relationUrl, {
+                title: this.searchResults[0].title
+            }, (data) => {
+                this.relation = data;
+                this.reload()
+              // location.reload()
+            });
+        },
+        async searchAndGetRelation() {
+            await this.search();
+            // location.reload();
+            return this.getRelation();
         }
     },
     mounted() {
-        return this.search();
+        return this.searchAndGetRelation();
     },
     watch: {
         '$route' () {
             this.keyword = this.$route.params.keyword
-            this.search();
+            this.searchAndGetRelation();
         }
     },
 }
